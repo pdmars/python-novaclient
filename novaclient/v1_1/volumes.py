@@ -118,6 +118,15 @@ class VolumeManager(base.ManagerWithFind):
         return self._create("/servers/%s/os-volume_attachments" % server_id,
             body, "volumeAttachment")
 
+    def rescan_volume(self, server_id, volume_id):
+        body = {'volume_id': volume_id}
+        url = "/servers/%s/os-online_extend_volume" % server_id
+        return self._update(url, body)
+
+    def get_volume_blockdev(self, server_id, volume_id):
+        url = "/servers/%s/os-online_extend_volume/%s" % (server_id, volume_id)
+        return self._get(url, "volume_blockdev")
+
     def update_server_volume(self, server_id, attachment_id, new_volume_id):
         """
         Update the volume identified by the attachment ID, that is attached to

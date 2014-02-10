@@ -1745,6 +1745,30 @@ def do_volume_attach(cs, args):
 @utils.arg('server',
     metavar='<server>',
     help=_('Name or ID of server.'))
+@utils.arg('volume_id',
+    metavar='<volume>',
+    help=_('ID of the volume.'))
+def do_rescan_volume(cs, args):
+    """Rescan volume"""
+    cs.volumes.rescan_volume(_find_server(cs, args.server).id,
+                             args.volume_id)
+
+
+@utils.arg('server',
+    metavar='<server>',
+    help=_('Name or ID of server.'))
+@utils.arg('volume_id',
+    metavar='<volume>',
+    help=_('ID of the volume.'))
+def do_get_volume_blockdev(cs, args):
+    """Get size of volume block device"""
+    cs.volumes.get_volume_blockdev(_find_server(cs, args.server).id,
+                                    args.volume_id)
+
+
+@utils.arg('server',
+    metavar='<server>',
+    help=_('Name or ID of server.'))
 @utils.arg('attachment_id',
     metavar='<volume>',
     help=_('Attachment ID of the volume.'))
